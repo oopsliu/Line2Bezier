@@ -1,26 +1,27 @@
-[中文说明]()
+[中文说明](https://github.com/oopsliu/Line2Bezier/blob/master/README_CN.md)
+# Generate Flow-line (Bezier curve) Tool #
+## 1	Tool Description ##
+Curved lines are often required to visualize flow directions, such as the movement of population and traffics. This tool is used to convert straight lines into curved arcs to get a better visualization effects during mapping such scenarios.
 
-# TOOL DESCRIPTION #
+## 2	Function ##
+Convert straight lines (only has start and end vertex) into second order Bezier curves.
 
-This tool is used for processing raw CSV(*.gz) datasets, in order to make it usable as valid inputs when running ArcGIS GeoAnalytics tools. Functions including removing redundant fields, filtering rows, transforming time stamps and adding UUID. 
+## 3	Setting ##
+Input straight line feature class, i.e. C:\line.shp
 
-# HOW TO USE -- EXAMPLE: #
-## 1. Organize raw data ##
-Put all raw *.gz files under E:\OriginData:
+Output Bezier feature class, i.e. C:\Flowline.gdb\line2bezier
 
-![](http://i.imgur.com/4agHIs0.png)
-![](http://i.imgur.com/7A8llmt.png)
+## 4	Example ##
+Parameters：
+![](http://i.imgur.com/nOnJnt0.png)
 
-## 2. Run the tool from cmd##
-Put "DataCleaning.py" under E:\, and then run the tool from cmd:
-E:\>python DataCleaning.py e:\OriginData e:\Result T
+Before：
+![](http://i.imgur.com/iNa1tJP.png)
 
-![](http://i.imgur.com/RCp5aTY.png)
-
-## 3. Check results ##
-Processed *.csv datasets will be output under E:\Result:
-
-![](http://i.imgur.com/XlAx03Z.png)
-![](http://i.imgur.com/5eHTcYf.png)
-
+After：
+![](http://i.imgur.com/IbsG4Te.png)
+ 
+ 
+## Download ##
+[https://github.com/oopsliu/Line2Bezier/blob/master/line2bezier.py](https://github.com/oopsliu/Line2Bezier/blob/master/line2bezier.py "FlowLineTool")
  
