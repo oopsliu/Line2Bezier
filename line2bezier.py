@@ -4,7 +4,6 @@
 # Convert straight line to Bezier curve. Input straight line need to be in a projected coordinate system.
 # Created by LIU,Zheng. March 1 2017.
 #
-
 import os, arcpy  
 from math import atan2, pi
 import arcpy.cartography as CA
@@ -28,11 +27,10 @@ def shiftPointInDirection(firstx, firsty, lastx, lasty, length):
 		x1,y1 = lastx - length*0.3, lasty + length*0.07
 	return (x1, y1)  
   
-# create a inmemo polyline feature class and add field(s)  
+# create a inmemo polyline feature class
 addVertex = arcpy.CreateFeatureclass_management("in_memory", "addVertex", "POLYLINE", spatial_reference = arcpy.Describe(in_fc).spatialReference).getOutput(0)  
 arcpy.AddField_management(addVertex, "ORIGID", "LONG")  
-  
-# starting an edit session may not be necessary, but to stay on the safe side...  
+
 workspace = os.path.dirname(in_fc)  
 with arcpy.da.Editor(workspace) as edit:  
   
@@ -43,12 +41,10 @@ with arcpy.da.Editor(workspace) as edit:
 		length = shp.getLength("PLANAR","METERS")
 		firstPoint = shp.firstPoint  
 		lastPoint = shp.lastPoint  
-# handle individual vertices  
 		p0 = firstPoint  
 		p2 = lastPoint  
 		x1,y1 = shiftPointInDirection(p0.X, p0.Y, p2.X, p2.Y, length)  
 		p1 = arcpy.Point(x1, y1)  
-# create new feature and store it  
 		new_geometry = arcpy.Polyline(arcpy.Array([p0, p1, p2]))  
 		new_row = [new_geometry, row[1]]  
 		ic.insertRow(new_row)  
@@ -58,5 +54,6 @@ with arcpy.da.Editor(workspace) as edit:
 #
 smoothedFeatures = arcpy.GetParameterAsText(1)
 CA.SmoothLine(addVertex, smoothedFeatures, "BEZIER_INTERPOLATION", "", "", "NO_CHECK")
+
 # Delete inmemo fc
 arcpy.Delete_management("in_memory")
